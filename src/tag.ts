@@ -1,3 +1,5 @@
+type AttributeValue = string | number;
+
 class Tag {
   private static readonly singleTags = [
     "area",
@@ -18,7 +20,7 @@ class Tag {
 
   constructor(
     private name: string,
-    private attributes: Record<string, string> = {},
+    private attributes: Record<string, AttributeValue> = {},
     private content: string = "",
   ) {}
 
