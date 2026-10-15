@@ -1,0 +1,43 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![hexlet-check](https://github.com/ktvtk/react-urfu-project-81/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ktvtk/react-urfu-project-81/actions)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ktvtk/react-urfu-project-81.git"
+  },
+  "author": "ktvtk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ktvtk/react-urfu-project-81/issues"
+  },
+  "homepage": "https://github.com/ktvtk/react-urfu-project-81#readme",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "start": "node dist/src/index.js",
+    "start:dev": "tsx ./src/index.ts",
+    "lint": "oxlint && oxfmt --ignore-path=.oxfmtignore --check",
+    "lint-fix": "oxfmt --ignore-path=.oxfmtignore && oxlint --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test-coverage": "vitest run --coverage"
+  },
+  "simple-git-hooks": {
+    "pre-push": "make lint"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "npm-check-updates": "^23.0.2",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
+    "simple-git-hooks": "^2.13.1",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.0"
+  },
+  "dependencies": {
+    "es-toolkit": "^1.51.0"
+  }
+}
