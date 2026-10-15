@@ -27,3 +27,5 @@ class Tag {
         return `${openingTag}${this.content}</${this.name}>`;
     }
 }
+
+export default Tag;
