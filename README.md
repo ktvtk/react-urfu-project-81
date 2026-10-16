@@ -1,28 +1,109 @@
-# Генератор форм на Typescript
+# Генератор форм на TypeScript
 
 [![hexlet-check](https://github.com/ktvtk/react-urfu-project-81/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ktvtk/react-urfu-project-81/actions)
 
-Библиотека, с помощью которой удобно создавать формы в шаблонах сайтов. Она заметно сокращает код описания формы за счет автоматической обработки ошибок и различных контролов.
+Библиотека, с помощью которой удобно создавать формы в шаблонах сайтов. Она позволяет генерировать HTML-разметку формы и её полей, автоматически подставляя значения из переданного шаблона.
 
-Учебный проект Хекслета: https://ru.hexlet.io/
-
+Учебный проект Хекслета: [https://ru.hexlet.io/](https://ru.hexlet.io/)
 
 ## Стек
 
+- TypeScript
 - JavaScript
+- Node.js
+- Vitest
 
 ## Установка
 
-<!-- Опишите установку: клонирование, зависимости, переменные окружения -->
+Клонируйте репозиторий и перейдите в директорию проекта:
 
 ```bash
 git clone https://github.com/ktvtk/react-urfu-project-81.git
 cd react-urfu-project-81
 ```
 
+Установите зависимости:
+
+```bash
+npm install
+```
+
 ## Использование
 
-<!-- Добавьте примеры запуска и запись asciinema — именно это смотрит работодатель -->
+Библиотека позволяет создавать HTML-формы с помощью метода `formFor`.
+
+Пример создания формы с текстовым полем и многострочным полем `textarea`:
+
+```typescript
+import HexletCode from "./src/index";
+
+const template = {
+  name: "rob",
+  job: "hexlet",
+  gender: "m",
+};
+
+const form = HexletCode.formFor(template, { method: "post" }, (f) => {
+  f.input("name");
+  f.input("job", { as: "textarea" });
+});
+
+console.log(form);
+```
+
+Результат:
+
+```html
+<form action="#" method="post"><input name="name" type="text" value="rob"><textarea cols="20" rows="40" name="job">hexlet</textarea></form>
+```
+
+### Дополнительные возможности
+
+**Указание URL формы**
+
+```typescript
+HexletCode.formFor(template, { url: "/users" }, (f) => {
+  f.input("name");
+});
+```
+
+**Добавление HTML-атрибутов**
+
+```typescript
+HexletCode.formFor(template, {}, (f) => {
+  f.input("name", { class: "user-input" });
+});
+```
+
+**Настройка `textarea`**
+
+```typescript
+HexletCode.formFor(template, {}, (f) => {
+  f.input("job", { as: "textarea", rows: 50, cols: 50 });
+});
+```
+
+Если поле отсутствует в переданном объекте, библиотека выбрасывает ошибку с названием отсутствующего поля.
+
+## Проверка
+
+Запуск тестов:
+
+```bash
+npm test
+```
+
+Проверка типов TypeScript:
+
+```bash
+npm run typecheck
+```
+
+Проверка форматирования и линтинга:
+
+```bash
+make lint
+```
 
 ---
 

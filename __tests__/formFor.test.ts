@@ -1,5 +1,10 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import HexletCode from "../src/index";
+
+const readFixture = (name: string) =>
+  readFileSync(join(__dirname, "__fixtures__", name), "utf-8").trim();
 
 describe("formFor", () => {
   const template = {
@@ -11,7 +16,7 @@ describe("formFor", () => {
   it("generates an empty form with default URL", () => {
     const form = HexletCode.formFor(template, {}, () => {});
 
-    expect(form).toBe('<form action="#" method="post"></form>');
+    expect(form).toBe(readFixture("form.html"));
   });
 
   it("uses the provided URL", () => {
@@ -36,9 +41,7 @@ describe("formFor", () => {
       f.input("job", { as: "textarea" });
     });
 
-    expect(form).toBe(
-      '<form action="#" method="post"><textarea cols="20" rows="40" name="job">hexlet</textarea></form>',
-    );
+    expect(form).toBe(readFixture("textarea.html"));
   });
 
   it("supports additional attributes", () => {
@@ -51,7 +54,7 @@ describe("formFor", () => {
     );
   });
 
-  it("overrides textarea defaults", () => {
+  it("overrides textarea default attributes", () => {
     const form = HexletCode.formFor(template, {}, (f) => {
       f.input("job", { as: "textarea", rows: 50, cols: 50 });
     });
